@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio & resume of Billy Phan — pigment on warm paper: loose strokes, plain type, no fuss.">
+    <title>billy phan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Lilita+One&family=Nunito:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- defer: never blocks parsing, runs once the DOM exists -->
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- ==========================================================
+         PAINT FILTERS
+         --------------------------------------------------------
+         STATIC set (#brush*) — ragged edges for chips, bars, rules.
+
+         HEAT set (#heatA*, #heatB*) — the same idea, one filter per
+         animation frame. The stylesheet flips between them with
+         step-end keyframes; that flipping is the 15fps shimmer.
+         Within a set only the seed changes.
+
+         Nothing here needs hand-editing.
+         ========================================================== -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <defs>
+            <!-- ---------- static ---------- -->
+            <filter id="brushHeavy" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.014 0.035" numOctaves="3" seed="11" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="brushEdge" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="4" seed="4" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="brushFine" x="-15%" y="-15%" width="130%" height="130%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="19" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+
+            <!-- ---------- heat: heavy masses, 8 frames ---------- -->
+            <filter id="heatA0" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="11" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA1" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="23" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA2" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="37" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA3" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="51" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA4" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="68" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA5" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="84" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA6" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="97" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatA7" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013 0.033" numOctaves="3" seed="113" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+
+            <!-- ---------- heat: thin strokes and dots, 6 frames ----------
+                 A different frame count from the set above, so the two
+                 layers drift out of phase instead of pulsing in lockstep. -->
+            <filter id="heatB0" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="19" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatB1" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="41" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatB2" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="63" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatB3" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="79" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatB4" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="91" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="heatB5" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="107" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- paper tooth over the whole page -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ==========================================================
+         NAV  (done — just edit the brand text / link labels)
+         ========================================================== -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#top" class="nav-brand">Billy Phan</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================================
+         HERO  (done — swap in your name, title, one-liner, links)
+         --------------------------------------------------------
+         The .paint-field is pure decoration. Each <span> is one
+         brushstroke: colour + position live in styles.css under
+         "Hero composition". Add, remove or re-colour freely.
+
+         The two .paint-layer wrappers carry the animated filter, so
+         the shimmer costs two filter passes rather than one per
+         stroke. Put big masses in -heavy, thin strokes in -fine.
+         ========================================================== -->
+    <header class="hero" id="top">
+
+        <div class="paint-field" aria-hidden="true">
+            <div class="paint-layer paint-layer-heavy">
+                <span class="brush b-sand"></span>
+                <span class="brush b-vermillion"></span>
+                <span class="brush b-apricot"></span>
+                <span class="brush b-marigold"></span>
+                <span class="brush b-red"></span>
+                <span class="brush b-cobalt"></span>
+                <span class="brush b-coral-r"></span>
+                <span class="brush b-coral-b"></span>
+                <span class="brush b-forest-patch"></span>
+            </div>
+            <div class="paint-layer paint-layer-fine">
+                <span class="brush b-forest-line"></span>
+                <span class="brush b-brown-line"></span>
+                <span class="brush b-cream-block"></span>
+                <span class="brush b-dot-brown"></span>
+                <span class="brush b-dot-marigold"></span>
+            </div>
+        </div>
+
+        <!-- heavier grain, sitting on the paint but under the type -->
+        <div class="hero-grain" aria-hidden="true"></div>
+
+        <div class="container hero-inner">
+            <p class="hero-label">Software Engineer</p>
+
+            <div class="hero-nameplate">
+                <h1>Billy Phan</h1>
+            </div>
+
+            <p class="hero-scribble">portfolio &amp; résumé</p>
+
+            <p class="hero-subtitle">
+                
+                Computer Science student based in Philadelphia, PA
+            </p>
+
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">See my work</a>
+                <a href="mailto:billy.phann@outlook.com" class="btn btn-accent">Get in touch</a>
+                <a href="resources/Phan_Billy.pdf" class="btn btn-outline">Download résumé</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ==========================================================
+            About Section
+             ========================================================== -->
+        <section class="section" id="about">
+            <div class="section-header">
+                <span class="section-number">I</span>
+                <h2>About</h2>
+                <p class="lead">
+                    Nice to meet you! My name is Billy Phan, a Software Engineer and Computer Science student at <strong>Temple University</strong>, based in <strong>Philadelphia, PA</strong>.
+                </p>
+            </div>
+
+            <div class="about-layout">
+                <div class="about-photo">
+                    <figure class="photo-frame">
+                        <div class="photo-plate">
+                            <img src="resources/imgs/billy_selfie.jpg"
+                                 alt="Billy Phan" decoding="async">
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="prose">
+                    <p>
+                        I grew up always being around technology, which is pivotal to my interest in Software Engineering. I love tackling complex problems and creating efficient solutions to them.
+                    </p>
+                    <p>
+                        I am interested in all facets of Software Engineering, but I am particularly interested in the <strong>Web Development</strong> side of things.
+                    </p>
+                    <p>
+                        Outside of work and school, I enjoy playing video games, going to the gym, cooking, listening to music, and doing freelance video-editing!
+                    </p>
+                </div>
+
+                <!-- spans the full width, under the photo and the prose -->
+                <aside class="card card-cobalt edu-card">
+                    <div class="card-color-bar"></div>
+                    <div class="card-body edu-body">
+                        <div class="edu-main">
+                            <span class="card-tag">Education</span>
+                            <h3 class="card-title">Bachelor Of Science &amp; Computer Science</h3>
+                            <p class="edu-school">Temple University</p>
+                            <p class="edu-meta">2023 &mdash; 2027 · Philadelphia, PA</p>
+                            <p class="card-text">
+                                Societies &mdash; OwlHacks, GDSC, Temple ACM, TUDev, CodePath
+                            </p>
+                        </div>
+                        <div class="edu-side">
+                            <h4 class="edu-subhead">Important Coursework</h4>
+                            <ul class="skill-tags edu-tags">
+                                <li class="skill-tag">Data Structures</li>
+                                <li class="skill-tag">Object-Oriented Programming</li>
+                                <li class="skill-tag">Database Management Systems</li>
+                                <li class="skill-tag">Discrete Mathematics</li>
+                                <li class="skill-tag">Software Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================
+             Experience Section
+             ========================================================== -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <span class="section-number">II</span>
+                <h2>Experience</h2>
+                <p class="lead">
+                    Some of my experience, pertaining to my career!
+                </p>
+            </div>
+
+            <ol class="timeline">
+                <li class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-meta">May 2026 — August 2026· Philadelphia, PA</p>
+                        <h3 class="timeline-role">Web Development Intern</h3>
+                        <p class="timeline-org">McCormick Taylor</p>
+                        <ul class="timeline-points">
+                            <li>Engineered a C# data migration pipeline using the WordPress REST API and Dapper to import 150+ project records from the company website into a SQL Server database, eliminating manual data entry .</li>
+                            <li>Lead the rebrand for the <strong>ASCE Structural Engineering Institute Philadelphia Chapter</strong>, utilizing Adobe XD to design the User Experience.</li>
+                            <li>Assisting with the design and program of company internal web components, using Adobe XD,  C# and JavaScript.</li>
+                        </ul>
+                        <ul class="skill-tags timeline-stack">
+                            <li class="skill-tag skill-tag-cobalt">C#</li>
+                            <li class="skill-tag skill-tag-orange">JavaScript</li>
+                            <li class="skill-tag skill-tag-green">Blazor</li>
+                            <li class="skill-tag skill-tag-yellow">Adobe XD</li>
+                            <li class="skill-tag skill-tag-violet">WordPress</li>
+                            <li class="skill-tag skill-tag-pink">Azure</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-meta">Dec 2024 — Oct 2025 · Philadelphia, PA</p>
+                        <h3 class="timeline-role">Graphic Designer</h3>
+                        <p class="timeline-org">OwlHacks</p>
+                        <ul class="timeline-points">
+                            <li>Utilized Canva to design a sponsorship prospectus and collaborated on the theme for OwlHacks 2025, tailoring materials to appeal to investors and brands. Secured sponsorships from Fortune 500 companies like SAP, and Google.</li>
+                            <li>Managed the creation of the OwlHacks 2025 trailer and designed graphics for the OwlHacks Instagram page, ensuring all deliverables were completed on time by coordinating with over 80+ team members via Slack. Increased social media engagement and event visibility through consistent and appealing visuals.</li>
+                        </ul>
+                        <ul class="skill-tags timeline-stack">
+                            <li class="skill-tag skill-tag-yellow">Canva</li>
+                            <li class="skill-tag skill-tag-cobalt">Photoshop</li>
+                            <li class="skill-tag skill-tag-green">After Effects</li>
+                        </ul>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+
+        <!-- ==========================================================
+            Skills Section
+             ========================================================== -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <span class="section-number">III</span>
+                <h2>Skills</h2>
+                <p class="lead">
+                    The tools I reach for first, roughly in the order I reach for them.
+                </p>
+            </div>
+
+            <div class="skill-clusters">
+                <div class="skill-cluster">
+                    <h4>Languages</h4>
+                    <ul class="skill-tags">
+                        <li class="skill-tag skill-tag-cobalt">C#</li>
+                        <li class="skill-tag skill-tag-cobalt">C</li>
+                        <li class="skill-tag skill-tag-orange">JavaScript</li>
+                        <li class="skill-tag skill-tag-pink">Java</li>
+                        <li class="skill-tag skill-tag-yellow">Python</li>
+                        <li class="skill-tag skill-tag-violet">SQL</li>
+                        <li class="skill-tag skill-tag-green">HTML &amp; CSS</li>
+                    </ul>
+                </div>
+
+                <div class="skill-cluster">
+                    <h4>Frameworks</h4>
+                    <ul class="skill-tags">
+                        <li class="skill-tag skill-tag-cobalt">React</li>
+                        <li class="skill-tag skill-tag-violet">Node.js</li>
+                        <li class="skill-tag skill-tag-green">ASP.NET</li>
+                        <li class="skill-tag skill-tag-pink">Next.js</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================
+             Projects Section
+             ========================================================== -->
+        <section class="section" id="projects">
+            <div class="section-header">
+                <span class="section-number">IV</span>
+                <h2>Projects</h2>
+                <p class="lead">
+                    Some of my favorite projects I built during work, school, and in my free time!
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <article class="card card-orange">
+                    <div class="card-color-bar"></div>
+                    <div class="card-body">
+                        <span class="card-tag">Web</span>
+                        <h3 class="card-title">My Portfolio</h3>
+                        <p class="card-text">
+                            The website you're currently viewing! Built with HTML, CSS, and JavaScript. The design is inspired by an art cover of a song.
+                        </p>
+                        <div class="card-links">
+                            <a href="#">Live</a>
+                            <a href="#">Code</a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-orange">HTML & CSS</span>
+                        <span class="badge badge-green">JavaScript</span>
+                        
+                    </div>
+                </article>
+
+                <article class="card card-cobalt">
+                    <div class="card-color-bar"></div>
+                    <div class="card-body">
+                        <span class="card-tag">Script</span>
+                        <h3 class="card-title">Data Migration Script</h3>
+                        <p class="card-text">
+                            During my internship at <strong>McCormick Taylor</strong>, I built a C# data migration pipeline to import 150+ project records from the company website into a SQL Server database.
+                        </p>
+                        <div class="card-links">
+                            <a href="https://github.com/88shokan/MigrationScriptApp" target="_blank" rel="noopener noreferrer">Code</a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-cobalt">C#</span>
+                        <span class="badge badge-green">SQL</span>
+                        <span class ="badge badge-yellow">WordPress</span>
+                        <span class ="badge badge-violet">Dapper</span>
+                        <span class ="badge badge-pink">Azure</span>
+                        
+                    </div>
+                </article>
+
+                <article class="card card-green">
+                    <div class="card-color-bar"></div>
+                    <div class="card-body">
+                        <span class="card-tag">Hackathon</span>
+                        <h3 class="card-title">Neat Street</h3>
+                        <p class="card-text">
+                            During OwlHacks 2024, my teammates and I built a mobile application that gamifies the process of cleaning up streets and neighborhoods. The app allows users to take pictures of trash and litter, and then earn points for cleaning up their community.
+                        </p>
+                        <div class="card-links">
+                            <a href="https://github.com/88shokan/NeatStreet" target="_blank" rel="noopener noreferrer">Code</a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-green">Python</span>
+                        <span class="badge badge-cobalt">Flask</span>
+                        <span class="badge badge-yellow">Swift</span>
+                        <span class="badge badge-pink">Hugging Face</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================
+         Footer Section
+         ========================================================== -->
+    <footer class="footer">
+        <div class="paint-field paint-field-dark" aria-hidden="true">
+            <div class="paint-layer paint-layer-heavy">
+                <span class="brush b-f-cobalt"></span>
+                <span class="brush b-f-vermillion"></span>
+                <span class="brush b-f-forest"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p class="footer-logo">Billy Phan</p>
+                    <p class="footer-tagline">Student & Software Engineer</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:billy.phann@outlook.com">Email</a>
+                    <a href="https://github.com/88shokan" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://linkedin.com/in/billyphann/" target="_blank" rel="noopener">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
