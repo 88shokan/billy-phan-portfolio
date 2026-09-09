@@ -5,10 +5,12 @@
  * `badges` is a list, and takes as many as you like — they wrap onto
  * new rows inside the card footer. Two forms, mix them freely:
  *
- *     badges: ['React', 'JavaScript']          // takes the card's tone
+ *     badges: ['React', 'JavaScript']                // takes the card's tone
  *     badges: [{ label: 'React', tone: 'cobalt' }]   // its own colour
  *
- * Drop `live` or `code` to hide that link.
+ * `live` and `code` are optional — leave a key out entirely and that
+ * link is not rendered. Prefer omitting it to pointing it at '#', which
+ * looks like a working link and does nothing.
  */
 
 const projects = [
@@ -19,9 +21,10 @@ const projects = [
         blurb: "The current site you're on! The style is inspired by an art cover for a song. Made with React, HTML, CSS, and JavaScript.",
         tone: 'orange',
         badges: ['React', 'JavaScript', 'HTML', 'CSS'],
-        year: '2026',
-        live: '#',
-        code: '#'
+        year: '2026'
+        // TODO: once this is pushed, add:
+        //   code: 'https://github.com/88shokan/<repo>',
+        //   live: 'https://88shokan.github.io'
     },
     {
         id: 'project-two',
@@ -31,8 +34,7 @@ const projects = [
         tone: 'cobalt',
         badges: ['C#', 'SQL Server', 'Dapper'],
         year: '2026',
-        live: '#',
-        code: '#'
+        code: 'https://github.com/88shokan/MigrationScriptApp'
     },
     {
         id: 'project-three',
@@ -42,8 +44,7 @@ const projects = [
         tone: 'green',
         badges: ['Python', 'Flask', 'Swift', 'Hugging Face'],
         year: '2024',
-        live: '#',
-        code: '#'
+        code: 'https://github.com/88shokan/Neat-Street'
     }
 ];
 
