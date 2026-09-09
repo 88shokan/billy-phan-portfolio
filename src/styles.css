@@ -826,7 +826,26 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: var(--space-sm);
+    /* nowrap on purpose: with wrap, flexbox breaks the year onto its own
+       line rather than shrinking the badge list, so a card with four
+       badges spent a whole row on a four-character year. Shrinking is
+       what we want here — the list wraps internally instead. */
+    flex-wrap: nowrap;
+}
+
+/* A card can carry as many badges as it likes; they wrap onto new
+   rows and the year stays pinned to the right. min-width:0 lets the
+   list actually wrap instead of forcing the footer wider than the
+   card, which is what a flex item does by default. */
+.card-badges {
+    list-style: none;
+    display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+    /* 0 grow: take only the width the chips need, so the year keeps
+       its place on the first row instead of being bumped below them */
+    flex: 0 1 auto;
+    min-width: 0;
 }
 
 .card-year {
@@ -835,6 +854,8 @@ body {
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--text-secondary);
+    flex: 0 0 auto;
+    margin-left: auto;
 }
 
 /* Card colour variants — one pigment drives bar, tag and shadow */

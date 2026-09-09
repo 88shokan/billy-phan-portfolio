@@ -1,8 +1,13 @@
 /*
- * TODO: these are still placeholders — replace them with your real work.
- *
  * `tone` sets the card's pigment, which drives its top bar, its tag and
  * its hover shadow: orange | green | pink | cobalt | yellow | violet.
+ *
+ * `badges` is a list, and takes as many as you like — they wrap onto
+ * new rows inside the card footer. Two forms, mix them freely:
+ *
+ *     badges: ['React', 'JavaScript']          // takes the card's tone
+ *     badges: [{ label: 'React', tone: 'cobalt' }]   // its own colour
+ *
  * Drop `live` or `code` to hide that link.
  */
 
@@ -13,30 +18,30 @@ const projects = [
         title: 'Portfolio Site',
         blurb: "The current site you're on! The style is inspired by an art cover for a song. Made with React, HTML, CSS, and JavaScript.",
         tone: 'orange',
-        badge: 'React',
+        badges: ['React', 'JavaScript', 'HTML', 'CSS'],
         year: '2026',
         live: '#',
         code: '#'
     },
     {
         id: 'project-two',
-        tag: 'Tool',
-        title: 'Project Name',
-        blurb: 'What it does and why it mattered. If it saved someone time, say how much.',
+        tag: 'Script',
+        title: 'Data Migration Script',
+        blurb: 'During my internship at McCormick Taylor, I wrote a script in C# to import 150+ project records from the company website to a SQL database.',
         tone: 'cobalt',
-        badge: 'Python',
-        year: '20XX',
+        badges: ['C#', 'SQL Server', 'Dapper'],
+        year: '2026',
         live: '#',
         code: '#'
     },
     {
         id: 'project-three',
-        tag: 'Experiment',
-        title: 'Project Name',
-        blurb: 'The weird one. Say what you were curious about, and what you found out.',
+        tag: 'Hackathon Project',
+        title: 'Neat Street',
+        blurb: 'During OwlHacks 2024, I worked with my team to create a mobile application that gamified the process of cleaning up litter in your neighborhood. The app was built with Flask, Swift, Hugging Face, and Python.',
         tone: 'green',
-        badge: 'Canvas',
-        year: '20XX',
+        badges: ['Python', 'Flask', 'Swift', 'Hugging Face'],
+        year: '2024',
         live: '#',
         code: '#'
     }
