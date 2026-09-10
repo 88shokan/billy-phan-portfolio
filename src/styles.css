@@ -1246,7 +1246,9 @@ body {
    ============================================================ */
 .signposts {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* auto-fit rather than a fixed 4: removing a signpost used to leave an
+       empty column, and adding one used to overflow the row */
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: var(--space-lg);
 }
 

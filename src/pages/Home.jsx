@@ -7,8 +7,7 @@ import { CONTACT } from '../data/site.js';
 const SIGNPOSTS = [
     { to: '/about', numeral: 'I', label: 'About', note: 'Learn more about me and what I do!' },
     { to: '/experience', numeral: 'II', label: 'Experience', note: 'Learn about my career path!' },
-    { to: '/skills', numeral: 'III', label: 'Skills', note: 'Learn about my technical abilities I use to build things!' },
-    { to: '/projects', numeral: 'IV', label: 'Projects', note: 'Some of my work I have done in school, work, and in my free-time!' }
+    { to: '/projects', numeral: 'III', label: 'Projects', note: 'Some of my work I have done in school, work, and in my free-time!' }
 ];
 
 /*

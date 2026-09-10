@@ -22,7 +22,7 @@ export default function Projects() {
     return (
         <>
             <PageHeader
-                numeral="IV"
+                numeral="III"
                 title="Projects"
                 lead="Some of my favorite projects I built during work, school, and in my free time!"
             />
