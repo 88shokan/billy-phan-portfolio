@@ -14,7 +14,7 @@ const experience = [
         org: 'McCormick Taylor',
         points: [
             'Engineered a C# data migration pipeline using the WordPress REST API and Dapper to import 150+ project records from the company website into a SQL Server database, eliminating manual data entry.',
-            'Lead the rebrand for the ASCE Structural Engineering Institute Philadelphia Chapter, utilizing Adobe XD to design the User Experience.',
+            'Lead the website rebrand for the ASCE Structural Engineering Institute Philadelphia Chapter, utilizing Adobe XD to design the User Experience.',
             'Assisting with the design and program of company internal web components, using Adobe XD, C# and JavaScript.'
         ],
         stack: [
