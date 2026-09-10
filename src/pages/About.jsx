@@ -32,7 +32,7 @@ export default function About() {
                             solutions to them.
                         </p>
                         <p>
-                            I am interested in all faucets of Software Engineering, but I am particularly
+                            I am interested in all facets of Software Engineering, but I am particularly
                             interested in the <strong>Web Development</strong> side of things.
                         </p>
                         <p>
